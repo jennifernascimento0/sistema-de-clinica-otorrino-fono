@@ -1,0 +1,60 @@
+{% extends 'logica/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="bi bi-clipboard2-pulse"></i> Registro de atendimento</h4>
+            </div>
+            <div class="card-body bg-white">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <!-- esquerda -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-primary">1. Anamnese</label>
+                                <textarea name="anamnese" class="form-control" rows="4" placeholder="Histórico clínico e queixas principais..."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-primary">2. Avaliação vocal</label>
+                                <textarea name="avaliacao_vocal" class="form-control" rows="4" placeholder="Parâmetros de voz, tempo de fonação, etc..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- direita -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-success">3. Diagnóstico</label>
+                                <textarea name="diagnostico" class="form-control" rows="4" placeholder="Hipótese ou diagnóstico fechado..."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-success">4. Conduta</label>
+                                <textarea name="conduta" class="form-control" rows="4" placeholder="Fonoterapia, encaminhamentos, cirurgia..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- observações -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary">5. Observações adicionais</label>
+                                <textarea name="observacoes" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <a href="{% url 'home' %}" class="btn btn-light me-md-2">Cancelar</a>
+                        <button type="submit" class="btn btn-primary px-5 shadow-sm">Salvar registro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

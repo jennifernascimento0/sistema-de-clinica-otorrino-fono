@@ -9,9 +9,9 @@
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="#">Gestão Clínica</a>
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">Clínica Otorrino & Fono</a>
             <div class="navbar-nav">
-                <a class="nav-link" href="#">Pacientes</a>
+                <a class="nav-link" href="{% url 'paciente_list' %}">Pacientes</a>
                 <a class="nav-link" href="#">Profissionais</a>
                 <a class="nav-link" href="#">Consultas</a>
             </div>
@@ -19,11 +19,17 @@
     </nav>
 
     <div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
         <div class="card shadow-sm p-4">
             {% block content %}
             
-            <h2 class="text-center">Bem-vindo ao sistema!</h2>
-            <p class="text-center text-muted">Selecione uma opção no menu acima para começar.</p>
             {% endblock %}
         </div>
     </div>
