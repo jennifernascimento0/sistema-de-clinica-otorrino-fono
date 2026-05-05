@@ -1,0 +1,41 @@
+{% extends 'logica/base.html' %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4">Sistema de Clínica Otorrino e Fono</h1>
+    <p class="lead">Bem-vindo de volta ao painel administrativo.</p>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <i class="bi bi-people-fill display-4 text-primary"></i>
+                <h5 class="card-title mt-3">Pacientes</h5>
+                <p class="card-text">Gerencie o cadastro de pacientes e históricos.</p>
+                <a href="{% url 'paciente_list' %}" class="btn btn-outline-primary">Ver Lista</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <i class="bi bi-person-badge display-4 text-success"></i>
+                <h5 class="card-title mt-3">Profissionais</h5>
+                <p class="card-text">Cadastre médicos e fonoaudiólogos.</p>
+                <a href="#" class="btn btn-outline-success">Gerenciar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <i class="bi bi-calendar-check display-4 text-info"></i>
+                <h5 class="card-title mt-3">Consultas</h5>
+                <p class="card-text">Acompanhe a agenda de atendimentos.</p>
+                <a href="#" class="btn btn-outline-info">Agendar agora</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -6,3 +6,6 @@ def paciente_list(request):
     pacientes = Paciente.objects.all()
     # e aqui envia os dados para o template paciente_list.html
     return render(request, 'logica/paciente_list.html', {'pacientes': pacientes})
+
+def home(request):
+    return render(request, 'logica/home.html')

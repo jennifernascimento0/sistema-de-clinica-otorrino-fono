@@ -1,0 +1,25 @@
+{% extends 'logica/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-primary shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Agendar Nova Consulta</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Selecione o paciente e o profissional para registrar o horário.</p>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">Confirmar Agendamento</button>
+                        <a href="#" class="btn btn-light">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
