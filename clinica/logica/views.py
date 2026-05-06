@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Paciente, Consulta, Profissional
+from .forms import ProfissionalForm
+
 #listar parcientes
 def paciente_list(request):
     # aqui faz a busca de todos os pacientes cadastrados no banco de dados
@@ -111,12 +113,19 @@ def profissional_list(request):
 #criar profissionais
 def criar_profissional(request):
     if request.method == 'POST':
-        Profissional.objects.create( 
-            nome=request.POST .get('nome'),
-            especialidade=request.POST.get('especialidade'),
-            registro=request.POST.get('registro'))
-        return redirect('profissional_list')
-    return render(request,'profissional/criar.html')
+       # Profissional.objects.create( 
+        #    nome=request.POST .get('nome'),
+         #   especialidade=request.POST.get('especialidade'),
+          #  registro=request.POST.get('registro'))
+       # return redirect('profissional_list')
+
+        form = ProfissionalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profissional_list')
+    else:
+        form = ProfissionalForm()
+    return render(request,'logica/profissional_form.html', {'form': form})
 
 #editar profissional
 def editar_profissional(request,id):

@@ -4,10 +4,9 @@ from . import views
 
 urlpatterns = [
    # path("admin/", admin.site.urls),
-    # p�g inicial!!!
+    #pag inicial
     path('', views.home, name='home'),
     #pacientes
-    # quando o usu�rio digitar /pacientes/, ele chama a view que a gente criou
     path('pacientes/', views.paciente_list, name='paciente_list'),
     path('pacientes/novo/',views.criar_paciente, name='criar_paciente'),
     path('pacientes/editar/<int:id>/',views.editar_paciente, name='editar_paciente'),
