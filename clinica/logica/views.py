@@ -46,9 +46,63 @@ def deletar_paciente(request,id):
 def home(request):
     return render(request, 'logica/home.html')
 
+#Consultas
+
 def consulta_list(request):
     consultas = Consulta.objects.all()
     return render(request, 'logica/consulta_list.html', {'consultas': consultas})
+
+#criar consultas
+def criar_consulta(request):
+    if request.method == 'POST':
+        paciente_id = request.POST .get('paciente')
+        profissional_id = request.POST .get('profissional')
+
+        paciente = get_object_or_404(Paciente, id=paciente_id)
+        profissional = get_object_or_404(Profissional, id=profissional_id)
+
+        Consulta.objects.create(
+            paciente=paciente,
+            profissional=profissional,
+            data=request.POST.get('data'),
+            observacoes=request.POST.get('observacoes')
+        )
+        return redirect('consulta_list')
+    
+    pacientes = Paciente.objects.all()
+    profissionais = Profissional.objects.all()
+
+    return render(request, 'consultas/criar.html', {
+        'pacientes': pacientes,
+        'profissionais': profissionais
+    })
+
+def editar_consulta(request, id):
+    consulta = get_object_or_404(Consulta, id=id)
+
+    if request.method == 'POST':
+        consulta.paciente = get_object_or_404(Paciente, id=request.POST.get('paciente'))
+        consulta.profissional = get_object_or_404(Profissional, id=request.POST.get('profissional'))
+        consulta.data = request.POST.get('data')
+        consulta.observacoes = request.POST.get('observacoes')
+        consulta.save()
+        return redirect('consulta_list')
+
+    return render(request, 'consultas/editar.html', {
+        'consulta': consulta,
+        'pacientes': Paciente.objects.all(),
+        'profissionais': Profissional.objects.all()
+    })
+
+def deletar_consulta(request, id):
+    consulta = get_object_or_404(Consulta, id=id)
+    consulta.delete()
+    return redirect('consulta_list')
+
+
+
+        
+
 #profissional
 def profissional_list(request):
     profissionais = Profissional.objects.all()
