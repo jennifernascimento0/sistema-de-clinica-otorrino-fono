@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from .models import Paciente, Consulta, Profissional
 #listar parcientes
 def paciente_list(request):
@@ -16,6 +16,32 @@ def criar_paciente(request):
             email=request.POST.get('email'))
         return redirect('paciente_list')
     return render(request,'pacientes/criar.html')
+
+#editar pacientes
+def editar_paciente(request,id):
+    #busca o paciente pelo id ou retorna erro 404 se n existir
+    paciente = get_object_or_404(Paciente, id=id)
+
+    if request.method == 'POST':
+        #atuaiza os atributos do objeto
+        paciente.nome = request.POST .get('nome')
+        paciente.cpf = request.POST .get('cpf')
+        paciente.telefone = request.POST .get('telefone')
+        paciente.email = request.POST .get('email')
+
+        paciente.save()
+        return redirect('paciente_list')
+    return render(request, 'pacientes/editar.html', {'paciente':paciente})
+
+#deletar paciente
+def deletar_paciente(request,id):
+    paciente = get_object_or_404(Paciente, id=id)
+
+    if request.method == 'POST':
+        paciente.delete()
+        return redirect('paciente_list')
+    #a gnt pode colocar uma tela de confirmação caso acesse via get
+    return render(request, 'pacientes/confirmar_delecao.html', {'paciente':paciente})
 
 def home(request):
     return render(request, 'logica/home.html')
