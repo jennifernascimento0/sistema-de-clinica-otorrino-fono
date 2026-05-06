@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from logica import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
      # pág inicial!!!
-    path('', views.home, name='home'),
+    #path('', views.home, name='home'),
     # quando o usuário digitar /pacientes/, ele chama a view que a gente criou
-    path('pacientes/', views.paciente_list, name='paciente_list'),
+    path('logica/', include('logica.urls')),
+    #path('pacientes/', views.paciente_list, name='paciente_list'),
 ]

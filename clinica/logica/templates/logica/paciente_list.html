@@ -1,0 +1,36 @@
+{% extends 'logica/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Lista de Pacientes</h2>
+    <a href="#" class="btn btn-primary">Cadastrar Novo Paciente</a>
+</div>
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paciente in pacientes %}
+        <tr>
+            <td>{{ paciente.nome }}</td>
+            <td>{{ paciente.cpf }}</td>
+            <td>{{ paciente.telefone }}</td>
+            <td>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Excluir</button>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center text-muted">Nenhum paciente cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
