@@ -78,3 +78,13 @@ def editar_profissional(request,id):
         profissional.save()
         return redirect('profissional_list')
     return render(request, 'profissionais/editar.html', {'profissional':profissional})
+
+#deletar profissional
+def deletar_profissional(request,id):
+    profissional = get_object_or_404(Profissional, id=id)
+
+    if request.method == 'POST':
+        profissional.delete()
+        return redirect('profissional_list')
+    #a gnt pode colocar uma tela de confirmação caso acesse via get
+    return render(request, 'profissionais/confirmar_delecao.html', {'profissional':profissional})
