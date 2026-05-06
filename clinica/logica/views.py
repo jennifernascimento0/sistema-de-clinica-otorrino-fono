@@ -49,7 +49,17 @@ def home(request):
 def consulta_list(request):
     consultas = Consulta.objects.all()
     return render(request, 'logica/consulta_list.html', {'consultas': consultas})
-
+#profissional
 def profissional_list(request):
     profissionais = Profissional.objects.all()
     return render(request, 'logica/profissional_list.html', {'profissionais': profissionais})
+
+#criar profissionais
+def criar_profissional(request):
+    if request.method == 'POST':
+        Profissional.objects.create( 
+            nome=request.POST .get('nome'),
+            especialidade=request.POST.get('especialidade'),
+            registro=request.POST.get('registro'))
+        return redirect('profissional_list')
+    return render(request,'profissional/criar.html')
