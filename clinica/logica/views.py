@@ -63,3 +63,18 @@ def criar_profissional(request):
             registro=request.POST.get('registro'))
         return redirect('profissional_list')
     return render(request,'profissional/criar.html')
+
+#editar profissional
+def editar_profissional(request,id):
+    #busca o paciente pelo id ou retorna erro 404 se n existir
+    profissional = get_object_or_404(Profissional, id=id)
+
+    if request.method == 'POST':
+        #atuaiza os atributos do objeto
+        profissional.nome = request.POST .get('nome')
+        profissional.especialidade = request.POST .get('especialidade')
+        profissional.registro = request.POST .get('registro')
+
+        profissional.save()
+        return redirect('profissional_list')
+    return render(request, 'profissionais/editar.html', {'profissional':profissional})
