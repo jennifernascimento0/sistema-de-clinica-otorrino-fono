@@ -20,6 +20,7 @@ class Profissional (models.Model):
         default='Fonoaudiólogo'
     )
     registro = models.CharField(max_length=20)
+    telefone = models.CharField(max_length=15, null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -28,7 +29,7 @@ class Consulta(models.Model):
     paciente = models.ForeignKey(Paciente,on_delete=models.CASCADE)
     profissional = models.ForeignKey(Profissional,on_delete=models.CASCADE)
     data = models.DateTimeField()
-    observacoes = models.TextField()
+    observacoes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.paciente} - {self.data}"

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Paciente, Consulta, Profissional
-from .forms import ProfissionalForm
+from .forms import ProfissionalForm, ConsultaForm
 
 #listar parcientes
 def paciente_list(request):
@@ -51,33 +51,41 @@ def home(request):
 #Consultas
 
 def consulta_list(request):
-    consultas = Consulta.objects.all()
+    consultas = Consulta.objects.all().order_by('data')
     return render(request, 'logica/consulta_list.html', {'consultas': consultas})
 
 #criar consultas
 def criar_consulta(request):
     if request.method == 'POST':
-        paciente_id = request.POST .get('paciente')
-        profissional_id = request.POST .get('profissional')
+        #paciente_id = request.POST .get('paciente')
+        #profissional_id = request.POST .get('profissional')
 
-        paciente = get_object_or_404(Paciente, id=paciente_id)
-        profissional = get_object_or_404(Profissional, id=profissional_id)
+        #paciente = get_object_or_404(Paciente, id=paciente_id)
+        #profissional = get_object_or_404(Profissional, id=profissional_id)
 
-        Consulta.objects.create(
-            paciente=paciente,
-            profissional=profissional,
-            data=request.POST.get('data'),
-            observacoes=request.POST.get('observacoes')
-        )
-        return redirect('consulta_list')
+        #Consulta.objects.create(
+         #   paciente=paciente,
+          #  profissional=profissional,
+           # data=request.POST.get('data'),
+            #observacoes=request.POST.get('observacoes')
+        #)
+        #return redirect('consulta_list')
     
-    pacientes = Paciente.objects.all()
-    profissionais = Profissional.objects.all()
+    #pacientes = Paciente.objects.all()
+    #profissionais = Profissional.objects.all()
 
-    return render(request, 'consultas/criar.html', {
-        'pacientes': pacientes,
-        'profissionais': profissionais
-    })
+        form = ConsultaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('consulta_list')
+    else:
+        form = ConsultaForm()
+    
+    #return render(request, 'consultas/criar.html', {
+     #   'pacientes': pacientes,
+      #  'profissionais': profissionais
+    #})
+    return render(request, 'logica/consulta_form.html', {'form': form})
 
 def editar_consulta(request, id):
     consulta = get_object_or_404(Consulta, id=id)
