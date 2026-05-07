@@ -13,7 +13,7 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     <div class="mt-4 d-flex justify-content-between">
-                        <a href="#" class="btn btn-outline-secondary">Voltar</a>
+                        <a href="{% url 'profissional_list'%}" class="btn btn-outline-secondary">Voltar</a>
                         <button type="submit" class="btn btn-success">Finalizar Cadastro</button>
                     </div>
                 </form>

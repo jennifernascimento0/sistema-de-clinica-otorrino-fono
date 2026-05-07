@@ -42,8 +42,7 @@ def deletar_paciente(request,id):
     if request.method == 'POST':
         paciente.delete()
         return redirect('paciente_list')
-    #a gnt pode colocar uma tela de confirmação caso acesse via get
-    return render(request, 'pacientes/confirmar_delecao.html', {'paciente':paciente})
+    
 
 def home(request):
     return render(request, 'logica/home.html')
@@ -157,5 +156,4 @@ def deletar_profissional(request,id):
     if request.method == 'POST':
         profissional.delete()
         return redirect('profissional_list')
-    #a gnt pode colocar uma tela de confirmação caso acesse via get
-    return render(request, 'profissionais/confirmar_delecao.html', {'profissional':profissional})
+    

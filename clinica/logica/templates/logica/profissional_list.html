@@ -33,7 +33,16 @@
                     <td>{{ profissional.telefone }}</td>
                     <td class="text-center">
                         <a href="#" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="#" class="btn btn-sm btn-danger">Excluir</a>
+                        <form action="{% url 'deletar_profissional' profissional.id %}" 
+                                method="POST" 
+                                style="display:inline;">
+                                
+                                {% csrf_token %}
+                                
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Excluir
+                                </button>
+                            </form>
                     </td>
                 </tr>
                 {% empty %}

@@ -14,7 +14,7 @@ urlpatterns = [
 
     #consultas
     path('consultas/', views.consulta_list,name='consulta_list'),
-    path('consultas/novo', views.criar_consulta, name='criar_consulta'),
+    path('consultas/novo/', views.criar_consulta, name='criar_consulta'),
     path('consultas/editar/<int:id>/', views.editar_consulta, name='editar_consulta'),
     path('consultas/deletar/<int:id>/', views.deletar_consulta, name='deletar_consulta'),
 
