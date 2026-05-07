@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profissional, Consulta
+from .models import Profissional, Consulta, Paciente
 
 class ProfissionalForm(forms.ModelForm):
     class Meta:
@@ -14,3 +14,8 @@ class ConsultaForm(forms.ModelForm):
             #pra mostrar o calendário do navegador
             'data': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
+
+class PacienteForm(forms.ModelForm):
+    class Meta:
+        model = Paciente
+        fields = ['nome', 'cpf', 'telefone', 'email']
