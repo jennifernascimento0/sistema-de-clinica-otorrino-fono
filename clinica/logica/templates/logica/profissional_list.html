@@ -40,7 +40,7 @@
                     <td>{{ profissional.registro }}</td>
                     <td>{{ profissional.telefone }}</td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-warning">Editar</a>
+                        <a href="{% url 'editar_profissional' profissional.id %}" class="btn btn-sm btn-warning">Editar</a>
                         <form action="{% url 'deletar_profissional' profissional.id %}" 
                                 method="POST" 
                                 style="display:inline;">
