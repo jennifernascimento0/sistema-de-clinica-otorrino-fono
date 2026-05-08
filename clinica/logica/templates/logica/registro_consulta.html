@@ -15,46 +15,27 @@
                     <div class="row">
                         <!-- esquerda -->
                         <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-primary">1. Anamnese</label>
-                                <textarea name="anamnese" class="form-control" rows="4" placeholder="Histórico clínico e queixas principais..."></textarea>
+                            {{ form.anamnese|as_crispy_field }}
+                            {{ form.avaliacao_vocal|as_crispy_field }}
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-primary">2. Avaliação vocal</label>
-                                <textarea name="avaliacao_vocal" class="form-control" rows="4" placeholder="Parâmetros de voz, tempo de fonação, etc..."></textarea>
-                            </div>
-                        </div>
-
-                        <!-- direita -->
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-success">3. Diagnóstico</label>
-                                <textarea name="diagnostico" class="form-control" rows="4" placeholder="Hipótese ou diagnóstico fechado..."></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-success">4. Conduta</label>
-                                <textarea name="conduta" class="form-control" rows="4" placeholder="Fonoterapia, encaminhamentos, cirurgia..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- observações -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-secondary">5. Observações adicionais</label>
-                                <textarea name="observacoes" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                        <a href="{% url 'home' %}" class="btn btn-light me-md-2">Cancelar</a>
-                        <button type="submit" class="btn btn-primary px-5 shadow-sm">Salvar registro</button>
-                    </div>
-                </form>
+                           <div class="col-md-6">
+                {{ form.diagnostico|as_crispy_field }}
+                {{ form.conduta|as_crispy_field }}
             </div>
         </div>
-    </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                {{ form.observacoes|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+            <a href="{% url 'prontuario_paciente' paciente.id %}" class="btn btn-light me-md-2">Cancelar</a>
+            <button type="submit" class="btn btn-primary px-5 shadow-sm">
+                {% if titulo == 'Editar' %}Salvar Alterações{% else %}Salvar Registro{% endif %}
+            </button>
+        </div>
+    </form>
 </div>
 {% endblock %}

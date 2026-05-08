@@ -140,7 +140,7 @@ def registrar_atendimento(request, paciente_id):
         form = RegistroConsultaForm(request.POST)
         if form.is_valid():
             registro = form.save(commit=False)
-            registro.paciente = paciente # vincula o atendimento ao paciente da url
+            registro.paciente = paciente #vincula o atendimento ao paciente da url
             registro.save()
             return redirect('prontuario_paciente', id=paciente.id)
     else:
@@ -150,6 +150,31 @@ def registrar_atendimento(request, paciente_id):
         'form': form, 'paciente': paciente, 'titulo': 'Registrar'
     })
 
+#EDITAR um atendimento existente
+def editar_atendimento(request, id):
+    registro = get_object_or_404(RegistroConsulta, id=id)
+    #instance=registro faz o form ficar já preenchido!!!! n esquecer de colocar em tudo que for editar
+    if request.method == 'POST':
+        form = RegistroConsultaForm(request.POST, instance=registro)
+        if form.is_valid():
+            form.save()
+            #depois de editar, volta pro prontuário do paciente
+            return redirect('prontuario_paciente', id=registro.paciente.id)
+    else:
+        form = RegistroConsultaForm(instance=registro)
+    
+    return render(request, 'logica/registro_consulta.html', {
+        'form': form,
+        'paciente': registro.paciente, 'titulo': 'Editar'
+    })
+
+#EXCLUIR um atendimento
+def excluir_atendimento(request, id):
+    registro = get_object_or_404(RegistroConsulta, id=id)
+    paciente_id = registro.paciente.id
+    registro.delete()
+    #depois de apagar, volta pro prontuário
+    return redirect('prontuario_paciente', id=paciente_id)
         
 
 #profissional
