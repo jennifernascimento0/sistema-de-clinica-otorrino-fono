@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Paciente, Consulta, Profissional, RegistroConsulta
 from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsultaForm
@@ -53,9 +54,15 @@ def editar_paciente(request,id):
 def deletar_paciente(request,id):
     paciente = get_object_or_404(Paciente, id=id)
 
-    if request.method == 'POST':
-        paciente.delete()
-        return redirect('paciente_list')
+    request.post(
+        'http://127.0.0.1:5000/excluir',
+        json={
+            'id':paciente.id
+        }
+    )
+    paciente.delete()
+    return redirect('paciente_list')
+        
     
 
 def home(request):
