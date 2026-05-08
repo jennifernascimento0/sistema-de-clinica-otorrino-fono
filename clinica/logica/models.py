@@ -34,5 +34,17 @@ class Consulta(models.Model):
     def __str__(self):
         return f"{self.paciente} - {self.data}"
 
+class RegistroConsulta(models.Model):
+    #se o paciente for deletado, os registros somem tbm
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name='registros')
+    data_atendimento = models.DateTimeField(auto_now_add=True) # aqui salva a data e hora sozinho
+    anamnese = models.CharField()
+    conduta = models.TextField()
+    observacoes = models.TextField(blank=True, null=True)
+    diagnostico = models.TextField()
+    avaliacao_vocal = models.TextField()
+
+    def __str__(self):
+        return f"Atendimento {self.paciente.nome} - {self.data_atendimento.strftime('%d/%m/%Y')}"
 
     

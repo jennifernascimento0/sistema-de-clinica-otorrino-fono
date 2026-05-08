@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Paciente, Consulta, Profissional
-from .forms import ProfissionalForm, ConsultaForm, PacienteForm
+from .models import Paciente, Consulta, Profissional, RegistroConsulta
+from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsultaForm
 
 #listar parcientes
 def paciente_list(request):
@@ -60,6 +60,18 @@ def deletar_paciente(request,id):
 
 def home(request):
     return render(request, 'logica/home.html')
+
+#prontuario do paciente
+def prontuario_paciente(request, id):
+    # busca o paciente ou dá erro 404 se n existir
+    paciente = get_object_or_404(Paciente, id=id)
+    
+    # busca todos os registros clínicos desse paciente específico
+    historico = RegistroConsulta.objects.filter(paciente=paciente).order_by('-id')
+
+    return render(request, 'logica/prontuario.html', {
+        'paciente': paciente, 'historico': historico
+    })
 
 #Consultas
 
@@ -122,7 +134,21 @@ def deletar_consulta(request, id):
     consulta.delete()
     return redirect('consulta_list')
 
-
+def registrar_atendimento(request, paciente_id):
+    paciente = get_object_or_404(Paciente, id=paciente_id)
+    if request.method == 'POST':
+        form = RegistroConsultaForm(request.POST)
+        if form.is_valid():
+            registro = form.save(commit=False)
+            registro.paciente = paciente # vincula o atendimento ao paciente da url
+            registro.save()
+            return redirect('prontuario_paciente', id=paciente.id)
+    else:
+        form = RegistroConsultaForm()
+    
+    return render(request, 'logica/registro_consulta.html', {
+        'form': form, 'paciente': paciente, 'titulo': 'Registrar'
+    })
 
         
 

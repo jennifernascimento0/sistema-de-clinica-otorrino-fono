@@ -1,0 +1,49 @@
+{% extends 'logica/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card border-primary mb-4 shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Prontuário: {{ paciente.nome }}</h3>
+            <span class="badge bg-light text-dark">CPF: {{ paciente.cpf }}</span>
+        </div>
+        <div class="card-body">
+            <p><strong>Telefone:</strong> {{ paciente.telefone }} | <strong>Email:</strong> {{ paciente.email }}</p>
+            <a href="{% url 'registrar_anamnese' paciente.id %}" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Novo atendimento
+            </a>
+        </div>
+    </div>
+
+    <h4 class="mb-3">Histórico de Atendimentos</h4>
+    {% if historico %}
+        {% for registro in historico %}
+            <div class="card mb-3 shadow-sm border-left-info">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">
+                        <i class="bi bi-calendar-check"></i> {{ registro.data_atendimento|date:"d/m/Y" }}
+                    </h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Anamnese:</strong><br> {{ registro.anamnese }}</p>
+                            <p><strong>Avaliação Vocal:</strong><br> {{ registro.avaliacao_vocal }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Diagnóstico:</strong><br> {{ registro.diagnostico }}</p>
+                            <p><strong>Conduta:</strong><br> {{ registro.conduta }}</p>
+                        </div>
+                    </div>
+                    {% if registro.observacoes %}
+                        <div class="mt-2 p-2 bg-light border-start">
+                            <small class="text-muted"><strong>Observações:</strong> {{ registro.observacoes }}</small>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-light border text-center">Nenhum atendimento registrado para este paciente.</div>
+    {% endif %}
+</div>
+{% endblock %}

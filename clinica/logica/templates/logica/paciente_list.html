@@ -32,6 +32,9 @@
             <td>{{ paciente.telefone }}</td>
             <td>{{ paciente.email }}</td>
             <td>
+                <a href="{% url 'prontuario_paciente' paciente.id %}" class="btn btn-sm btn-primary">
+    <i class="bi bi-folder2-open"></i> Prontuário
+</a>
                 <a href="{% url 'editar_paciente' paciente.id %}" class="btn btn-sm btn-warning">Editar</a>
                 <form action="{% url 'deletar_paciente' paciente.id %}" 
                         method="POST" 

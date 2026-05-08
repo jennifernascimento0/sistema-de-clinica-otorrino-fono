@@ -11,6 +11,8 @@ urlpatterns = [
     path('pacientes/novo/',views.criar_paciente, name='criar_paciente'),
     path('pacientes/editar/<int:id>/',views.editar_paciente, name='editar_paciente'),
     path('pacientes/deletar/<int:id>/', views.deletar_paciente, name='deletar_paciente'),
+    path('pacientes/prontuario/<int:id>/', views.prontuario_paciente, name='prontuario_paciente'),
+    path('pacientes/atendimento/<int:paciente_id>/', views.registrar_atendimento, name='registrar_anamnese'),
 
     #consultas
     path('consultas/', views.consulta_list,name='consulta_list'),

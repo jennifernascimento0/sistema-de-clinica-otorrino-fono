@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profissional, Consulta, Paciente
+from .models import Profissional, Consulta, Paciente, RegistroConsulta
 
 class ProfissionalForm(forms.ModelForm):
     class Meta:
@@ -19,3 +19,8 @@ class PacienteForm(forms.ModelForm):
     class Meta:
         model = Paciente
         fields = ['nome', 'cpf', 'telefone', 'email']
+
+class RegistroConsultaForm(forms.ModelForm):
+    class Meta:
+        model = RegistroConsulta
+        fields = ['anamnese', 'avaliacao_vocal', 'diagnostico', 'conduta', 'observacoes']
