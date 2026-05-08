@@ -4,10 +4,16 @@ from .forms import ProfissionalForm, ConsultaForm, PacienteForm
 
 #listar parcientes
 def paciente_list(request):
-    # aqui faz a busca de todos os pacientes cadastrados no banco de dados
-    pacientes = Paciente.objects.all()
-    # e aqui envia os dados para o template paciente_list.html
+    termo_busca = request.GET.get('busca')
+
+    if termo_busca:
+        # icontains ignora maiúsculas/minúsculas
+        pacientes = Paciente.objects.filter(nome__icontains=termo_busca)
+    else:
+        pacientes = Paciente.objects.all()
+    
     return render(request, 'logica/paciente_list.html', {'pacientes': pacientes})
+
 #criar pacientes
 def criar_paciente(request):
     if request.method == 'POST':
@@ -25,7 +31,7 @@ def criar_paciente(request):
     else:
         form = PacienteForm()
     
-    return render(request, 'logica/paciente_form.html', {'form': form})
+    return render(request, 'logica/paciente_form.html', {'form': form, 'titulo': 'Cadastrar'})
 
 #editar pacientes
 def editar_paciente(request,id):
@@ -34,14 +40,14 @@ def editar_paciente(request,id):
 
     if request.method == 'POST':
         #atuaiza os atributos do objeto
-        paciente.nome = request.POST .get('nome')
-        paciente.cpf = request.POST .get('cpf')
-        paciente.telefone = request.POST .get('telefone')
-        paciente.email = request.POST .get('email')
-
-        paciente.save()
-        return redirect('paciente_list')
-    return render(request, 'pacientes/editar.html', {'paciente':paciente})
+        form = PacienteForm(request.POST, instance=paciente)
+        if form.is_valid():
+            form.save()
+            return redirect('paciente_list')
+    else:
+        form = PacienteForm(instance=paciente) # esse instance preenche automaticamente
+    
+    return render(request, 'logica/paciente_form.html', {'form': form, 'titulo': 'Editar'})
 
 #deletar paciente
 def deletar_paciente(request,id):
@@ -122,7 +128,14 @@ def deletar_consulta(request, id):
 
 #profissional
 def profissional_list(request):
-    profissionais = Profissional.objects.all()
+    termo_busca = request.GET.get('busca')
+
+    if termo_busca:
+        # icontains ignora maiúsculas/minúsculas
+        profissionais = Profissional.objects.filter(nome__icontains=termo_busca)
+    else:
+        profissionais = Profissional.objects.all()
+    
     return render(request, 'logica/profissional_list.html', {'profissionais': profissionais})
 
 #criar profissionais
@@ -140,7 +153,7 @@ def criar_profissional(request):
             return redirect('profissional_list')
     else:
         form = ProfissionalForm()
-    return render(request,'logica/profissional_form.html', {'form': form})
+    return render(request,'logica/profissional_form.html', {'form': form, 'titulo': 'Cadastrar Novo'})
 
 #editar profissional
 def editar_profissional(request,id):
@@ -149,13 +162,25 @@ def editar_profissional(request,id):
 
     if request.method == 'POST':
         #atuaiza os atributos do objeto
-        profissional.nome = request.POST .get('nome')
-        profissional.especialidade = request.POST .get('especialidade')
-        profissional.registro = request.POST .get('registro')
+        #profissional.nome = request.POST .get('nome')
+        #profissional.especialidade = request.POST .get('especialidade')
+        #profissional.registro = request.POST .get('registro')
 
-        profissional.save()
-        return redirect('profissional_list')
-    return render(request, 'profissionais/editar.html', {'profissional':profissional})
+        #profissional.save()
+        #return redirect('profissional_list')
+    #return render(request, 'profissionais/editar.html', {'profissional':profissional})
+
+    # instance=profissional pra os dados sejam salvos no profissional certo
+        form = ProfissionalForm(request.POST, instance=profissional)
+        if form.is_valid():
+            form.save()
+            return redirect('profissional_list')
+    else:
+        form = ProfissionalForm(instance=profissional)
+    
+    return render(request, 'logica/profissional_form.html', {
+        'form': form, 'titulo': 'Editar'
+    })
 
 #deletar profissional
 def deletar_profissional(request,id):

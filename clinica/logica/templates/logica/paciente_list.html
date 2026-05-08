@@ -6,12 +6,21 @@
     <a href="{% url 'criar_paciente' %}" class="btn btn-primary">Cadastrar Novo Paciente</a>
 </div>
 
+<form method="GET" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="busca" class="form-control" placeholder="Buscar por nome..." value="{{ request.GET.busca }}">
+        <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+        <a href="?" class="btn btn-outline-secondary">Limpar</a>
+    </div>
+</form>
+
 <table class="table table-hover">
     <thead class="table-dark">
         <tr>
             <th>Nome</th>
             <th>CPF</th>
             <th>Telefone</th>
+            <th>Email</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -21,6 +30,7 @@
             <td>{{ paciente.nome }}</td>
             <td>{{ paciente.cpf }}</td>
             <td>{{ paciente.telefone }}</td>
+            <td>{{ paciente.email }}</td>
             <td>
                 <a href="{% url 'editar_paciente' paciente.id %}" class="btn btn-sm btn-warning">Editar</a>
                 <form action="{% url 'deletar_paciente' paciente.id %}" 
