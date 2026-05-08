@@ -54,10 +54,14 @@ def editar_paciente(request,id):
 def deletar_paciente(request,id):
     paciente = get_object_or_404(Paciente, id=id)
 
-    request.post(
+    requests.post(
         'http://127.0.0.1:5000/excluir',
         json={
-            'id':paciente.id
+            'id':paciente.id,
+            'nome':paciente.nome,
+            'cpf: ':paciente.cpf,
+            'telefone: ':paciente.telefone,
+            'email':paciente.email
         }
     )
     paciente.delete()

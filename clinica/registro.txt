@@ -1,0 +1,19 @@
+ 
+            paciente excluído
+            ID:5;
+            nome:maria cecilia;
+            cpf4645228;
+            telefone12365874;
+            email:None;
+            data:2026-05-08 15:26:52.610795
+            
+             
+            paciente excluído
+            ID:4;
+            nome:Jennifer de Oliveira do Nascimento;
+            cpf4444444444;
+            telefone87454120020;
+            email:jenniferdnascimento02@gmail.com;
+            data:2026-05-08 15:27:08.077061
+            
+            

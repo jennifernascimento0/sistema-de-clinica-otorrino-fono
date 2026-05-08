@@ -1,11 +1,20 @@
 from django.db import models
 
 class Paciente (models.Model):
-    
+    STATUS_CHOICES = [
+        ('ATIVO','Ativo'),
+        ('PENDENTE','Pendente',),
+        ('EXCLUIDO','EXCLUIDO')
+    ]
     nome = models.CharField(max_length=100)
     cpf = models.CharField(max_length=14)
     telefone = models.CharField(max_length=15)
     email = models.EmailField(blank=True, null=True)
+    status_exclusao = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='ATIVO'
+    )
 
     def __str__(self):
         return self.nome
