@@ -8,6 +8,14 @@
     </a>
 </div>
 
+<form method="GET" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="busca" class="form-control" placeholder="Buscar por nome..." value="{{ request.GET.busca }}">
+        <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+        <a href="?" class="btn btn-outline-secondary">Limpar</a>
+    </div>
+</form>
+
 <div class="card shadow-sm">
     <div class="card-body p-0">
         <table class="table table-hover mb-0">

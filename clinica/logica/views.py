@@ -76,7 +76,17 @@ def prontuario_paciente(request, id):
 #Consultas
 
 def consulta_list(request):
-    consultas = Consulta.objects.all().order_by('data')
+    termo_busca = request.GET.get('busca')
+    
+    if termo_busca:
+        #busca pelo nome do paciente ou nome do profissional
+        consultas = Consulta.objects.filter(
+            paciente__nome__icontains=termo_busca
+        ) | Consulta.objects.filter(
+            profissional__nome__icontains=termo_busca
+        )
+    else:
+        consultas = Consulta.objects.all().order_by('data')
     return render(request, 'logica/consulta_list.html', {'consultas': consultas})
 
 #criar consultas
