@@ -15,3 +15,4 @@ Como rodar o projeto localmente:
 4. Execute o servidor: cd clinica
 python manage.py runserver
 5. Acesse no navegador: [http://127.0.0.1:8000/]
+6. Para executar o microsserviço: abra um segundo terminal e execute cd clinica e depois python microsservico.py
