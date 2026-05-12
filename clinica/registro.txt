@@ -16,4 +16,58 @@
             email:jenniferdnascimento02@gmail.com;
             data:2026-05-08 15:27:08.077061
             
+             
+            paciente excluído
+            ID:7;
+            nome:teste;
+            cpfNone;
+            telefoneNone;
+            email:teste@hotmail.com;
+            data:2026-05-12 13:37:40.587455
+            
+             
+            paciente excluído
+            ID:3;
+            nome:Ana Maria Santos;
+            cpfNone;
+            telefoneNone;
+            email:123testando@hotmail.com;
+            data:2026-05-12 13:38:40.647821
+            
+             
+            paciente excluído
+            ID:8;
+            nome:Jessica de oliveira do nascimento;
+            cpfNone;
+            telefoneNone;
+            email:jessica@gmail.com;
+            data:2026-05-12 13:40:59.439581
+            
+             
+            paciente excluído
+            ID:6;
+            nome:maria cecilia;
+            cpfNone;
+            telefoneNone;
+            email:jenniferdnascimento02@gmail.com;
+            data:2026-05-12 13:41:35.221826
+            
+             
+            paciente excluído
+            ID:10;
+            nome:teste de serviço;
+            cpfNone;
+            telefoneNone;
+            email:teste@hotmail.com;
+            data:2026-05-12 13:58:26.824799
+            
+             
+            paciente excluído
+            ID:9;
+            nome:Jessica de oliveira do nascimento;
+            cpf202020;
+            telefone819875421;
+            email:jessica@gmail.com;
+            data:2026-05-12 14:01:16.792935
+            
             

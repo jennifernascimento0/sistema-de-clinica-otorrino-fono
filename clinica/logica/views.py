@@ -59,8 +59,8 @@ def deletar_paciente(request,id):
         json={
             'id':paciente.id,
             'nome':paciente.nome,
-            'cpf: ':paciente.cpf,
-            'telefone: ':paciente.telefone,
+            'cpf':paciente.cpf,
+            'telefone':paciente.telefone,
             'email':paciente.email
         }
     )

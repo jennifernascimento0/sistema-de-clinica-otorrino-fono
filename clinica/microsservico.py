@@ -18,14 +18,14 @@ def excluir():
             paciente excluído
             ID:{paciente_id};
             nome:{nome};
-            cpf{cpf};
-            telefone{telefone};
+            cpf: {cpf};
+            telefone: {telefone};
             email:{email};
             data:{horario}
             
             '''
         )
-    print(f'paciente{paciente_id} recebido para exclusão')
+    print(f'paciente {paciente_id} recebido para exclusão')
     return jsonify({
         'mensagem':'exclusão processada'
     })
