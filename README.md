@@ -2,10 +2,10 @@
 Este projeto consiste em um sistema de gestão para uma clínica especializada em Otorrinolaringologia e Fonoaudiologia, desenvolvido como parte da disciplina de Desenvolvimento Web II, lecionada pelo prof. Rodrigo Lira, no IFPE - campus Paulista. O objetivo é facilitar o cadastro de pacientes, profissionais e o registro detalhado de consultas clínicas. Projeto desenvolvido pelas discentes Marcela Helena e Jennifer de Oliveira, do 4º período de ADS - Análise e Desenvolvimento de Sistemas.
 
 Tecnologias Utilizadas
-Framework Web: Django (Python).
-Interface: HTML5, CSS3 e Bootstrap 5.
-Ícones: Bootstrap Icons.
-Banco de Dados:
+Framework Web: Django (Python);
+Interface: HTML5, CSS3 e Bootstrap 5;
+Ícones: Bootstrap Icons;
+Banco de Dados: SQLite;
 Versionamento: Git & GitHub.
 
 Como rodar o projeto localmente:
