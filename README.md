@@ -5,7 +5,7 @@ Tecnologias Utilizadas
 Framework Web: Django (Python).
 Interface: HTML5, CSS3 e Bootstrap 5.
 Ícones: Bootstrap Icons.
-Banco de Dados:
+Banco de Dados: SQLite
 Versionamento: Git & GitHub.
 
 Como rodar o projeto localmente:
