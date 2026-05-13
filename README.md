@@ -14,5 +14,5 @@ Como rodar o projeto localmente:
 3. Instale as dependências: pip install -r requirements.txt
 4. Execute o servidor: cd clinica
 python manage.py runserver
-5. Acesse no navegador: [http://127.0.0.1:8000/]
+5. Acesse no navegador: [http://127.0.0.1:8000/logica]
 6. Para executar o microsserviço: abra um segundo terminal e execute cd clinica e depois python microsservico.py
