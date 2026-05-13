@@ -70,4 +70,13 @@
             email:jessica@gmail.com;
             data:2026-05-12 14:01:16.792935
             
+             
+            paciente excluído
+            ID:11;
+            nome:Jessica de oliveira do nascimento;
+            cpf: 1478526884;
+            telefone: 81962246552;
+            email:jessica@gmail.com;
+            data:2026-05-13 10:03:28.480885
+            
             

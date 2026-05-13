@@ -2,6 +2,7 @@ import requests
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Paciente, Consulta, Profissional, RegistroConsulta
 from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsultaForm
+from django.db.models import Q
 
 #listar parcientes
 def paciente_list(request):
@@ -204,7 +205,7 @@ def profissional_list(request):
 
     if termo_busca:
         # icontains ignora maiúsculas/minúsculas
-        profissionais = Profissional.objects.filter(nome__icontains=termo_busca)
+        profissionais = Profissional.objects.filter(Q(nome__icontains=termo_busca)  | Q(especialidade__icontains=termo_busca))
     else:
         profissionais = Profissional.objects.all()
     
