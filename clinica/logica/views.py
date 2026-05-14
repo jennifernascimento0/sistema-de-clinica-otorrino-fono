@@ -19,13 +19,7 @@ def paciente_list(request):
 #criar pacientes
 def criar_paciente(request):
     if request.method == 'POST':
-        #Paciente.objects.create( 
-         #   nome=request.POST .get('nome'),
-          #  cpf=request.POST.get('cpf'),
-           # telefone=request.POST.get('telefone'),
-            #email=request.POST.get('email'))
-        #return redirect('paciente_list')
-    #return render(request,'pacientes/criar.html')
+
         form = PacienteForm(request.POST)
         if form.is_valid():
             form.save()
@@ -188,7 +182,7 @@ def agenda_calendario(request):
         ).distinct() # distinct evita duplicatas se o termo bater em mais de um campo
     else:
         consultas = Consulta.objects.all()
-        
+
     return render(request, 'logica/agenda_calendario.html', {'consultas': consultas})
 
 
@@ -207,11 +201,6 @@ def profissional_list(request):
 #criar profissionais
 def criar_profissional(request):
     if request.method == 'POST':
-       # Profissional.objects.create( 
-        #    nome=request.POST .get('nome'),
-         #   especialidade=request.POST.get('especialidade'),
-          #  registro=request.POST.get('registro'))
-       # return redirect('profissional_list')
 
         form = ProfissionalForm(request.POST)
         if form.is_valid():
@@ -227,15 +216,6 @@ def editar_profissional(request,id):
     profissional = get_object_or_404(Profissional, id=id)
 
     if request.method == 'POST':
-        #atuaiza os atributos do objeto
-        #profissional.nome = request.POST .get('nome')
-        #profissional.especialidade = request.POST .get('especialidade')
-        #profissional.registro = request.POST .get('registro')
-
-        #profissional.save()
-        #return redirect('profissional_list')
-    #return render(request, 'profissionais/editar.html', {'profissional':profissional})
-
     # instance=profissional pra os dados sejam salvos no profissional certo
         form = ProfissionalForm(request.POST, instance=profissional)
         if form.is_valid():
