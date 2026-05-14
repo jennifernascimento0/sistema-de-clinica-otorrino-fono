@@ -3,14 +3,20 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .models import Paciente, Consulta, Profissional, RegistroConsulta
 from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsultaForm
 from django.db.models import Q
+import re
 
 #listar parcientes
 def paciente_list(request):
     termo_busca = request.GET.get('busca')
 
     if termo_busca:
+        apenas_numeros = re.sub(r'\D', '', termo_busca)
         # icontains ignora maiúsculas/minúsculas
-        pacientes = Paciente.objects.filter(nome__icontains=termo_busca)
+        pacientes = Paciente.objects.filter(
+            Q(nome__icontains=termo_busca) | 
+            Q(cpf__icontains=termo_busca) |
+            Q(cpf__icontains=apenas_numeros)
+            )
     else:
         pacientes = Paciente.objects.all()
     
