@@ -21,6 +21,7 @@ urlpatterns = [
     path('consultas/novo/', views.criar_consulta, name='criar_consulta'),
     path('consultas/editar/<int:id>/', views.editar_consulta, name='editar_consulta'),
     path('consultas/deletar/<int:id>/', views.deletar_consulta, name='deletar_consulta'),
+    path('agenda/visualizar/', views.agenda_calendario, name='agenda_calendario'),
 
 
     #profissionais

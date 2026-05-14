@@ -3,6 +3,9 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Agenda de Consultas</h2>
+    <a href="{% url 'agenda_calendario' %}" class="btn btn-outline-primary">
+        <i class="bi bi-calendar3"></i> Visualizar Agenda
+    </a>
     <a href="{% url 'criar_consulta' %}" class="btn btn-primary">
         Agendar Nova Consulta
     </a>

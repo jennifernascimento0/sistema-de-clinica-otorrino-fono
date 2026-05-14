@@ -1,0 +1,161 @@
+{% extends 'logica/base.html' %}
+
+{% block content %}
+<style>
+    :root {
+        --clinica-azul: #0d6efd; 
+        --clinica-azul-hover: #0a58ca;
+    }
+
+    /* cabeçalho dos dias da semana */
+    .fc-col-header-cell {
+        background-color: var(--clinica-azul) !important;
+        color: white !important;
+        padding: 12px 0 !important;
+        font-weight: 500 !important;
+        border: none !important;
+    }
+
+    /* estilo dos números dos dias */
+    .fc-daygrid-day-number {
+        color: #495057 !important;
+        text-decoration: none !important;
+        padding: 8px !important;
+        font-weight: bold;
+    }
+
+    /* destaque para o dia atual */
+    .fc-day-today {
+        background-color: #f8f9fa !important;
+    }
+    .fc-day-today .fc-daygrid-day-number {
+        background-color: var(--clinica-azul);
+        color: white !important;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+    }
+
+    /* estilo dos eventos (consultas) */
+    .fc-event {
+        background-color: #e7f1ff !important; 
+        border-left: 4px solid var(--clinica-azul) !important; 
+        color: #084298 !important; 
+        padding: 4px 8px !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        margin: 2px 4px !important;
+        border-radius: 4px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* botões do calendário */
+    .fc-button-primary {
+        background-color: var(--clinica-azul) !important;
+        border-color: var(--clinica-azul) !important;
+        text-transform: capitalize;
+    }
+    .fc-button-primary:hover {
+        background-color: var(--clinica-azul-hover) !important;
+    }
+
+    /* container do calendário */
+    #calendar {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border: 1px solid #dee2e6;
+    }
+
+    .fc-toolbar-title {
+        color: #212529;
+        font-weight: 700;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="text-dark mb-0">Agenda de Atendimentos</h2>
+            <p class="text-muted">Visualize e filtre os horários da clínica</p>
+        </div>
+        <a href="{% url 'consulta_list' %}" class="btn btn-outline-primary">
+            <i class="bi bi-list-ul"></i> Voltar para Lista
+        </a>
+    </div>
+
+    <div class="card mb-4 border-0 shadow-sm">
+        <div class="card-body bg-light rounded">
+<form method="GET" class="mb-4">
+    <div class="input-group shadow-sm">
+        <span class="input-group-text bg-white border-end-0">
+            <i class="bi bi-search text-primary"></i>
+        </span>
+        <input type="text" name="busca" class="form-control border-start-0" 
+               placeholder="Buscar por paciente, fonoaudiólogo ou especialidade..." 
+               value="{{ request.GET.busca }}">
+        
+        <button class="btn btn-primary" type="submit">Pesquisar</button>
+        
+        <a href="?" class="btn btn-outline-secondary">Limpar</a>
+    </div>
+</form>
+        </div>
+    </div>
+
+    <div id='calendar'></div>
+</div>
+
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/pt-br.js'></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt-br',
+            height: 'auto',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            
+            events: [
+                {% for consulta in consultas %}
+                {
+                    title: '{{ consulta.paciente.nome }}',
+                    start: '{{ consulta.data|date:"Y-m-d" }}T{{ consulta.data|date:"H:i:s" }}',
+                    extendedProps: {
+                        profissional: '{{ consulta.profissional.nome }}',
+                        obs: '{{ consulta.observacoes|default:"" }}'
+                    }
+                },
+                {% endfor %}
+            ],
+            //como cada evento aparece
+            eventContent: function(arg) {
+                let div = document.createElement('div');
+                div.innerHTML = `
+                    <div class="fc-content">
+                        <div class="fw-bold" style="font-size: 0.85rem;">${arg.event.title}</div>
+                        <div style="font-size: 0.75rem; opacity: 0.8;">
+                            <i class="bi bi-person-badge"></i> ${arg.event.extendedProps.profissional}
+                        </div>
+                    </div>
+                `;
+                return { domNodes: [div] };
+            }
+        });
+        calendar.render();
+    });
+</script>
+{% endblock %}

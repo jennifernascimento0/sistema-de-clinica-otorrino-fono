@@ -104,34 +104,13 @@ def consulta_list(request):
 #criar consultas
 def criar_consulta(request):
     if request.method == 'POST':
-        #paciente_id = request.POST .get('paciente')
-        #profissional_id = request.POST .get('profissional')
-
-        #paciente = get_object_or_404(Paciente, id=paciente_id)
-        #profissional = get_object_or_404(Profissional, id=profissional_id)
-
-        #Consulta.objects.create(
-         #   paciente=paciente,
-          #  profissional=profissional,
-           # data=request.POST.get('data'),
-            #observacoes=request.POST.get('observacoes')
-        #)
-        #return redirect('consulta_list')
-    
-    #pacientes = Paciente.objects.all()
-    #profissionais = Profissional.objects.all()
-
         form = ConsultaForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('consulta_list')
     else:
         form = ConsultaForm()
-    
-    #return render(request, 'consultas/criar.html', {
-     #   'pacientes': pacientes,
-      #  'profissionais': profissionais
-    #})
+
     return render(request, 'logica/consulta_form.html', {'form': form})
 
 def editar_consulta(request, id):
@@ -198,6 +177,20 @@ def excluir_atendimento(request, id):
     #depois de apagar, volta pro prontuário
     return redirect('prontuario_paciente', id=paciente_id)
         
+
+def agenda_calendario(request):
+    termo_busca = request.GET.get('busca')
+    if termo_busca:
+        consultas = Consulta.objects.filter(
+            Q(paciente__nome__icontains=termo_busca) | 
+            Q(profissional__nome__icontains=termo_busca) |
+            Q(profissional__especialidade__icontains=termo_busca)
+        ).distinct() # distinct evita duplicatas se o termo bater em mais de um campo
+    else:
+        consultas = Consulta.objects.all()
+        
+    return render(request, 'logica/agenda_calendario.html', {'consultas': consultas})
+
 
 #profissional
 def profissional_list(request):
