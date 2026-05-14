@@ -55,6 +55,6 @@ class RegistroConsulta(models.Model):
     avaliacao_vocal = models.TextField()
 
     def __str__(self):
-        return f"Atendimento {self.paciente.nome} - {self.data_atendimento.strftime('%d/%m/%Y')}"
+        return f"Atendimento {self.paciente.nome} - {self.data_atendimento.strftime('%d/%m/%Y %H:%i')}"
 
     

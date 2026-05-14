@@ -22,6 +22,9 @@
                 <div class="card-body">
                     <h5 class="card-title text-primary">
                         <i class="bi bi-calendar-check"></i> {{ registro.data_atendimento|date:"d/m/Y" }}
+                        <small class="text-muted ms-2" style="font-size: 0.9rem;">
+                        <i class="bi bi-clock"></i> {{ registro.data_atendimento|date:"H:i" }}
+                    </small>
                     </h5>
                     <hr>
                     <div class="row">
