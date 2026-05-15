@@ -10,12 +10,12 @@ def paciente_list(request):
     termo_busca = request.GET.get('busca')
 
     if termo_busca:
-        apenas_numeros = re.sub(r'\D', '', termo_busca)
+        #apenas_numeros = re.sub(r'\D', '', termo_busca)
         # icontains ignora maiúsculas/minúsculas
         pacientes = Paciente.objects.filter(
             Q(nome__icontains=termo_busca) | 
-            Q(cpf__icontains=termo_busca) |
-            Q(cpf__icontains=apenas_numeros)
+            Q(cpf__icontains=termo_busca) #|
+           # Q(cpf__icontains=apenas_numeros)
             )
     else:
         pacientes = Paciente.objects.all()
