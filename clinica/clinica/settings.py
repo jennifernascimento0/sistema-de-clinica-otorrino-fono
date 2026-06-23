@@ -25,10 +25,7 @@ SECRET_KEY = "django-insecure-)@b=ad-9bl+bqu)5je8$=n87n7c&dh5&v!#g8i8iba$sre2rp^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-'34.228.44.147',
-'localhost',
-'127.0.0.1'
+ALLOWED_HOSTS = ['*'
 ]
 
 
@@ -133,3 +130,12 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}

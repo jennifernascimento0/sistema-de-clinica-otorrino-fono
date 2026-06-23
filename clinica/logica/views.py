@@ -3,9 +3,11 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .models import Paciente, Consulta, Profissional, RegistroConsulta
 from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsultaForm
 from django.db.models import Q
+from django.views.decorators.cache import cache_page
 import re
 
 #listar parcientes
+@cache_page(60)
 def paciente_list(request):
     termo_busca = request.GET.get('busca')
 
