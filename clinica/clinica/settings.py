@@ -25,7 +25,11 @@ SECRET_KEY = "django-insecure-)@b=ad-9bl+bqu)5je8$=n87n7c&dh5&v!#g8i8iba$sre2rp^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+'34.228.44.147',
+'localhost',
+'127.0.0.1'
+]
 
 
 # Application definition
@@ -78,11 +82,14 @@ WSGI_APPLICATION = "clinica.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "clinica",
+	"USER":"django_user",
+	"PASSWORD":"jennifer123",
+	"HOST":"localhost",
+	"PORT":"5432"
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
