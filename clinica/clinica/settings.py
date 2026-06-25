@@ -139,3 +139,7 @@ CACHES = {
         }
     }
 }
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECR_URL =  '/logica/'
+LOGOUT_REDIRECT = '/login/'

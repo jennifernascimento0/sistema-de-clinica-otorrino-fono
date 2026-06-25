@@ -4,9 +4,11 @@ from .models import Paciente, Consulta, Profissional, RegistroConsulta
 from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsultaForm
 from django.db.models import Q
 from django.views.decorators.cache import cache_page
+from django.contrib.auth.decorators import login_required
 import re
 
 #listar parcientes
+@login_required
 @cache_page(60)
 def paciente_list(request):
     termo_busca = request.GET.get('busca')
@@ -25,6 +27,7 @@ def paciente_list(request):
     return render(request, 'logica/paciente_list.html', {'pacientes': pacientes})
 
 #criar pacientes
+@login_required
 def criar_paciente(request):
     if request.method == 'POST':
 
@@ -38,6 +41,7 @@ def criar_paciente(request):
     return render(request, 'logica/paciente_form.html', {'form': form, 'titulo': 'Cadastrar'})
 
 #editar pacientes
+@login_required
 def editar_paciente(request,id):
     #busca o paciente pelo id ou retorna erro 404 se n existir
     paciente = get_object_or_404(Paciente, id=id)
@@ -54,6 +58,7 @@ def editar_paciente(request,id):
     return render(request, 'logica/paciente_form.html', {'form': form, 'titulo': 'Editar'})
 
 #deletar paciente
+@login_required
 def deletar_paciente(request,id):
     paciente = get_object_or_404(Paciente, id=id)
 
@@ -207,6 +212,7 @@ def profissional_list(request):
     return render(request, 'logica/profissional_list.html', {'profissionais': profissionais})
 
 #criar profissionais
+@login_required
 def criar_profissional(request):
     if request.method == 'POST':
 
@@ -219,6 +225,7 @@ def criar_profissional(request):
     return render(request,'logica/profissional_form.html', {'form': form, 'titulo': 'Cadastrar Novo'})
 
 #editar profissional
+@login_required
 def editar_profissional(request,id):
     #busca o paciente pelo id ou retorna erro 404 se n existir
     profissional = get_object_or_404(Profissional, id=id)
@@ -237,6 +244,7 @@ def editar_profissional(request,id):
     })
 
 #deletar profissional
+@login_required
 def deletar_profissional(request,id):
     profissional = get_object_or_404(Profissional, id=id)
 
