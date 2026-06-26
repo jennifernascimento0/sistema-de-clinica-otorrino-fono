@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.views.generic import RedirectView
 from django.contrib import admin
 from django.urls import path, include
 from logica import views
@@ -22,14 +23,12 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 	
     path(
-	'login/',
-	auth_views.LoginView.as_view(template_name='registration/login.html'),
+	'login/', auth_views.LoginView.as_view(template_name='registration/login.html'),
 	name='login'),
-    path('logout/',
-	auth_views.LogoutView.as_view(),
+    path('logout/', auth_views.LogoutView.as_view(),
 	name='logout'),
      # pág inicial!!!
-    #path('', views.home, name='home'),
+    path('', RedirectView.as_view(pattern_name='login'), name='index'),
     # quando o usuário digitar /pacientes/, ele chama a view que a gente criou
     path('logica/', include('logica.urls')),
     #path('pacientes/', views.paciente_list, name='paciente_list'),
