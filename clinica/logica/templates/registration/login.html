@@ -1,16 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login do Sistema</h2>
+{% extends 'logica/base.html' %}
+{% load crispy_forms_tags %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+{% block title %}Autenticação - Clínica Otorrino & Fono{% endblock %}
 
-        <button type="submit">Entrar</button>
-    </form>
-</body>
-</html>
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow border-0 rounded-3">
+            <div class="card-body p-5">
+                
+                <!-- Cabeçalho do Card -->
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-primary">Acesso ao Sistema</h2>
+                    <p class="text-muted small">Insira suas credenciais para acessar a clínica</p>
+                </div>
+
+                <!-- Mensagens de Erro Globais -->
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show small" role="alert">
+                        Usuário ou senha incorretos. Por favor, tente novamente.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+
+                <!-- Formulário de Login -->
+                <form method="post" action="{% url 'login' %}" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        {{ form|crispy }}
+                    </div>
+
+                    <!-- Botão de Acesso -->
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg fw-semibold shadow-sm">
+                            Entrar
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        
+        <div class="text-center mt-3">
+            <p class="text-muted small">&copy; 2026 Clínica Otorrino & Fono. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

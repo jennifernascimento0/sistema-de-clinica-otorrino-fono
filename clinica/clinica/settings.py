@@ -143,3 +143,7 @@ CACHES = {
 LOGIN_URL = '/login/'
 LOGIN_REDIRECR_URL =  '/logica/'
 LOGOUT_REDIRECT = '/login/'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://84e73e3f5bc94240b43dce314656bd57.vfs.cloud9.us-east-1.amazonaws.com'
+]
