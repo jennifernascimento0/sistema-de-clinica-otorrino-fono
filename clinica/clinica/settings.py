@@ -83,7 +83,7 @@ DATABASES = {
         "NAME": "clinica",
 	"USER":"django_user",
 	"PASSWORD":"jennifer123",
-	"HOST":"localhost",
+	"HOST":"clinica-db.c83yw80y8cn3.us-east-1.rds.amazonaws.com",
 	"PORT":"5432"
     }
 }

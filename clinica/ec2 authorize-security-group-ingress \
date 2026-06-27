@@ -1,0 +1,130 @@
+{
+    "DBInstance": {
+        "DBInstanceIdentifier": "clinica-db",
+        "DBInstanceClass": "db.t3.micro",
+        "Engine": "postgres",
+        "DBInstanceStatus": "available",
+        "MasterUsername": "django_user",
+        "DBName": "clinica",
+        "Endpoint": {
+            "Address": "clinica-db.c83yw80y8cn3.us-east-1.rds.amazonaws.com",
+            "Port": 5432,
+            "HostedZoneId": "Z2R2ITUGPM61AM"
+        },
+        "AllocatedStorage": 20,
+        "InstanceCreateTime": "2026-06-27T18:29:28.674000+00:00",
+        "PreferredBackupWindow": "03:59-04:29",
+        "BackupRetentionPeriod": 1,
+        "DBSecurityGroups": [],
+        "VpcSecurityGroups": [
+            {
+                "VpcSecurityGroupId": "sg-035ccefc1291dc4b0",
+                "Status": "active"
+            }
+        ],
+        "DBParameterGroups": [
+            {
+                "DBParameterGroupName": "default.postgres18",
+                "ParameterApplyStatus": "in-sync"
+            }
+        ],
+        "AvailabilityZone": "us-east-1b",
+        "DBSubnetGroup": {
+            "DBSubnetGroupName": "default",
+            "DBSubnetGroupDescription": "default",
+            "VpcId": "vpc-0edd2295cde6f2ca1",
+            "SubnetGroupStatus": "Complete",
+            "Subnets": [
+                {
+                    "SubnetIdentifier": "subnet-030caf9e4ae141a28",
+                    "SubnetAvailabilityZone": {
+                        "Name": "us-east-1e"
+                    },
+                    "SubnetOutpost": {},
+                    "SubnetStatus": "Active"
+                },
+                {
+                    "SubnetIdentifier": "subnet-0060a80dbe3cc6e4f",
+                    "SubnetAvailabilityZone": {
+                        "Name": "us-east-1f"
+                    },
+                    "SubnetOutpost": {},
+                    "SubnetStatus": "Active"
+                },
+                {
+                    "SubnetIdentifier": "subnet-0d50819a4921588bf",
+                    "SubnetAvailabilityZone": {
+                        "Name": "us-east-1d"
+                    },
+                    "SubnetOutpost": {},
+                    "SubnetStatus": "Active"
+                },
+                {
+                    "SubnetIdentifier": "subnet-009bece4d1559e9a0",
+                    "SubnetAvailabilityZone": {
+                        "Name": "us-east-1b"
+                    },
+                    "SubnetOutpost": {},
+                    "SubnetStatus": "Active"
+                },
+                {
+                    "SubnetIdentifier": "subnet-097324ac876fad369",
+                    "SubnetAvailabilityZone": {
+                        "Name": "us-east-1a"
+                    },
+                    "SubnetOutpost": {},
+                    "SubnetStatus": "Active"
+                },
+                {
+                    "SubnetIdentifier": "subnet-08b9329b9f68bc0df",
+                    "SubnetAvailabilityZone": {
+                        "Name": "us-east-1c"
+                    },
+                    "SubnetOutpost": {},
+                    "SubnetStatus": "Active"
+                }
+            ]
+        },
+        "PreferredMaintenanceWindow": "fri:06:15-fri:06:45",
+        "UpgradeRolloutOrder": "second",
+        "PendingModifiedValues": {},
+        "LatestRestorableTime": "2026-06-27T18:43:34+00:00",
+        "MultiAZ": false,
+        "EngineVersion": "18.3",
+        "AutoMinorVersionUpgrade": true,
+        "ReadReplicaDBInstanceIdentifiers": [],
+        "LicenseModel": "postgresql-license",
+        "StorageThroughput": 0,
+        "OptionGroupMemberships": [
+            {
+                "OptionGroupName": "default:postgres-18",
+                "Status": "in-sync"
+            }
+        ],
+        "PubliclyAccessible": true,
+        "StorageType": "gp2",
+        "DbInstancePort": 0,
+        "StorageEncrypted": false,
+        "DbiResourceId": "db-3EQJMFP3EHDWPRPQISDJJWNSAE",
+        "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+        "DomainMemberships": [],
+        "CopyTagsToSnapshot": false,
+        "MonitoringInterval": 0,
+        "DBInstanceArn": "arn:aws:rds:us-east-1:439408280090:db:clinica-db",
+        "IAMDatabaseAuthenticationEnabled": false,
+        "DatabaseInsightsMode": "standard",
+        "PerformanceInsightsEnabled": false,
+        "DeletionProtection": false,
+        "AssociatedRoles": [],
+        "TagList": [],
+        "CustomerOwnedIpEnabled": false,
+        "NetworkType": "IPV4",
+        "BackupTarget": "region",
+        "CertificateDetails": {
+            "CAIdentifier": "rds-ca-rsa2048-g1",
+            "ValidTill": "2027-06-27T18:27:30+00:00"
+        },
+        "DedicatedLogVolume": false,
+        "EngineLifecycleSupport": "open-source-rds-extended-support"
+    }
+}
