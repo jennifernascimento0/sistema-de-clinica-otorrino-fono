@@ -10,10 +10,27 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{% url 'home' %}">Clínica Otorrino & Fono</a>
+            <div class="d-flex justify-content-between align-items-center w-100">
             <div class="navbar-nav">
                 <a class="nav-link" href="{% url 'paciente_list' %}">Pacientes</a>
                 <a class="nav-link" href="{% url 'profissional_list' %}">Profissionais</a>
                 <a class="nav-link" href="{% url 'consulta_list' %}">Consultas</a>
+                </div>
+               
+<div class="navbar-nav align-items-center gap-3">
+    {% if user.is_authenticated %}
+        <span class="navbar-text text-white small me-2">
+            Olá, <strong>{{ user.username }}</strong>
+        </span>
+        <!-- o django exige que logout seja feito via post, então tem um formulário invisível que envia o post -->
+        <form method="post" action="{% url 'logout' %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-light btn-sm fw-semibold">
+                Sair
+            </button>
+        </form>
+    {% endif %}
+</div>
             </div>
         </div>
     </nav>
