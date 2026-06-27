@@ -5,6 +5,8 @@ from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsult
 from django.db.models import Q
 from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
+from django.contrib.auth.models import User
 import re
 
 
@@ -158,6 +160,15 @@ def registrar_atendimento(request, paciente_id):
         if form.is_valid():
             registro = form.save(commit=False)
             registro.paciente = paciente #vincula o atendimento ao paciente da url
+            
+            try:
+                registro.profissional = request.user.perfil_profissional
+            except AttributeError:
+                # Se o 'admin' puro tentar registrar, ele não tem perfil clínico. 
+                # Tratamos isso exibindo um aviso na tela para não quebrar o código.
+                messages.error(request, "Apenas usuários com perfil de Profissional de Saúde podem registrar atendimentos.")
+                return redirect('prontuario_paciente', id=paciente.id)
+            
             registro.save()
             return redirect('prontuario_paciente', id=paciente.id)
     else:
@@ -232,7 +243,19 @@ def criar_profissional(request):
 
         form = ProfissionalForm(request.POST)
         if form.is_valid():
-            form.save()
+            dados = form.cleaned_data
+            novo_usuario = User.objects.create_user(
+                username=dados['username'],
+                password=dados['password'],
+                first_name=dados['nome'].split()[0] #pega o primeiro nome para o "Olá, Fulano"
+            )
+            
+            #vincula ao usuário que acabamos de criar
+            profissional = form.save(commit=False)
+            profissional.user = novo_usuario
+            profissional.save()
+            
+            messages.success(request, f"Profissional {profissional.nome} e login de acesso criados com sucesso!")
             return redirect('profissional_list')
     else:
         form = ProfissionalForm()

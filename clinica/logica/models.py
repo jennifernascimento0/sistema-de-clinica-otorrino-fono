@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Paciente (models.Model):
     STATUS_CHOICES = [
@@ -20,6 +21,7 @@ class Paciente (models.Model):
         return self.nome
     
 class Profissional (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil_profissional')
     ESPECIALIDADE_CHOICES = [
         ('Otorrinolaringologista', 'Otorrinolaringologista'),
         ('Fonoaudiólogo', 'Fonoaudiólogo'),
@@ -33,8 +35,9 @@ class Profissional (models.Model):
     telefone = models.CharField(max_length=15, null=True, blank=True)
 
     def __str__(self):
-        return self.nome
-    
+        return f"{self.user.get_full_name() or self.user.username} ({self.especialidade})"
+        
+        
 class Consulta(models.Model):
     paciente = models.ForeignKey(Paciente,on_delete=models.CASCADE)
     profissional = models.ForeignKey(Profissional,on_delete=models.CASCADE)
@@ -45,6 +48,8 @@ class Consulta(models.Model):
         return f"{self.paciente} - {self.data}"
 
 class RegistroConsulta(models.Model):
+    consulta = models.ForeignKey(Consulta, on_delete=models.SET_NULL, null=True, blank=True)
+    profissional = models.ForeignKey(Profissional, on_delete=models.CASCADE) # Ou user
     #se o paciente for deletado, os registros somem tbm
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name='registros')
     data_atendimento = models.DateTimeField(auto_now_add=True) # aqui salva a data e hora sozinho

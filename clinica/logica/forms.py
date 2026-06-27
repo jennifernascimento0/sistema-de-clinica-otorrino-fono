@@ -1,10 +1,39 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Profissional, Consulta, Paciente, RegistroConsulta
 
 class ProfissionalForm(forms.ModelForm):
+    username = forms.CharField(
+        max_length=150, 
+        label="Nome de Usuário (Login)", 
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ex: rodrigo.lira'})
+    )
+    password = forms.CharField(
+        label="Senha", 
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Digite a senha'})
+    )
+    password_confirm = forms.CharField(
+        label="Confirme a Senha", 
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Repita a senha'})
+    )
     class Meta:
         model = Profissional
         fields = ['nome', 'especialidade', 'registro', 'telefone'] #tudo o que quiser que apareça
+        
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Este nome de usuário já está em uso.")
+        return username
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        password_confirm = cleaned_data.get("password_confirm")
+
+        if password and password_confirm and password != password_confirm:
+            raise forms.ValidationError("As senhas não coincidem.")
+        return cleaned_data
 
 class ConsultaForm(forms.ModelForm):
     class Meta:

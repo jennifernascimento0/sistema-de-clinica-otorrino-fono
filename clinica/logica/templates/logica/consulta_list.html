@@ -34,6 +34,7 @@
                 {% for consulta in consultas %}
                 <tr>
                     <td>{{ consulta.data|date:"d/m/Y H:i" }}</td>
+                    <span class="text-muted ms-2">| Atendido por: <strong>{{ registro.profissional.nome }}</strong></span>
                     <td>{{ consulta.paciente.nome }}</td>
                     <td>{{ consulta.profissional.nome }}</td>
                     <td>{{ consulta.observacoes|truncatechars:30 }}</td>

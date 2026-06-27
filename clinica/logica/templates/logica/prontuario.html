@@ -24,6 +24,7 @@
                         <i class="bi bi-calendar-check"></i> {{ registro.data_atendimento|date:"d/m/Y" }}
                         <small class="text-muted ms-2" style="font-size: 0.9rem;">
                         <i class="bi bi-clock"></i> {{ registro.data_atendimento|date:"H:i" }}
+                        <span class="text-muted ms-2">| Atendido por: <strong>{{ registro.profissional.nome }}</strong></span>
                     </small>
                     </h5>
                     <hr>
