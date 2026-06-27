@@ -98,7 +98,7 @@ def prontuario_paciente(request, id):
     })
 
 #Consultas
-
+@login_required
 def consulta_list(request):
     termo_busca = request.GET.get('busca')
     

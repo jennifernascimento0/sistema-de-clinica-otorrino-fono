@@ -148,8 +148,11 @@ CSRF_TRUSTED_ORIGINS = [
     'https://84e73e3f5bc94240b43dce314656bd57.vfs.cloud9.us-east-1.amazonaws.com'
 ]
 
-# Diz para o Django para onde ir após o login de sucesso
+# diz para o Django para onde ir após o login de sucesso
 LOGIN_REDIRECT_URL = '/logica/'
 
-# Diz para o Django para onde ir após o usuário fazer logout
+# diz para o Django para onde ir após o usuário fazer logout
 LOGOUT_REDIRECT_URL = '/login/'
+
+# diz ao Django para onde enviar usuários não autenticados
+LOGIN_URL = '/login/'
