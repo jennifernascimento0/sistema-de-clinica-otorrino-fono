@@ -4,8 +4,12 @@ from .models import Paciente, Consulta, Profissional, RegistroConsulta
 from .forms import ProfissionalForm, ConsultaForm, PacienteForm, RegistroConsultaForm
 from django.db.models import Q
 from django.views.decorators.cache import cache_page
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 import re
+
+
+def e_admin(user):
+    return user.is_superuser
 
 #listar parcientes
 @login_required
@@ -76,11 +80,12 @@ def deletar_paciente(request,id):
     return redirect('paciente_list')
         
     
-
+@login_required
 def home(request):
     return render(request, 'logica/home.html')
 
 #prontuario do paciente
+@login_required
 def prontuario_paciente(request, id):
     # busca o paciente ou dá erro 404 se n existir
     paciente = get_object_or_404(Paciente, id=id)
@@ -109,6 +114,7 @@ def consulta_list(request):
     return render(request, 'logica/consulta_list.html', {'consultas': consultas})
 
 #criar consultas
+@login_required
 def criar_consulta(request):
     if request.method == 'POST':
         form = ConsultaForm(request.POST)
@@ -120,6 +126,7 @@ def criar_consulta(request):
 
     return render(request, 'logica/consulta_form.html', {'form': form})
 
+@login_required
 def editar_consulta(request, id):
     consulta = get_object_or_404(Consulta, id=id)
 
@@ -137,11 +144,13 @@ def editar_consulta(request, id):
         'profissionais': Profissional.objects.all()
     })
 
+@login_required
 def deletar_consulta(request, id):
     consulta = get_object_or_404(Consulta, id=id)
     consulta.delete()
     return redirect('consulta_list')
 
+@login_required
 def registrar_atendimento(request, paciente_id):
     paciente = get_object_or_404(Paciente, id=paciente_id)
     if request.method == 'POST':
@@ -159,6 +168,7 @@ def registrar_atendimento(request, paciente_id):
     })
 
 #EDITAR um atendimento existente
+@login_required
 def editar_atendimento(request, id):
     registro = get_object_or_404(RegistroConsulta, id=id)
     #instance=registro faz o form ficar já preenchido!!!! n esquecer de colocar em tudo que for editar
@@ -177,6 +187,7 @@ def editar_atendimento(request, id):
     })
 
 #EXCLUIR um atendimento
+@login_required
 def excluir_atendimento(request, id):
     registro = get_object_or_404(RegistroConsulta, id=id)
     paciente_id = registro.paciente.id
@@ -185,6 +196,7 @@ def excluir_atendimento(request, id):
     return redirect('prontuario_paciente', id=paciente_id)
         
 
+@login_required
 def agenda_calendario(request):
     termo_busca = request.GET.get('busca')
     if termo_busca:
@@ -200,6 +212,7 @@ def agenda_calendario(request):
 
 
 #profissional
+@login_required
 def profissional_list(request):
     termo_busca = request.GET.get('busca')
 
@@ -213,6 +226,7 @@ def profissional_list(request):
 
 #criar profissionais
 @login_required
+@user_passes_test(e_admin)
 def criar_profissional(request):
     if request.method == 'POST':
 
@@ -226,6 +240,7 @@ def criar_profissional(request):
 
 #editar profissional
 @login_required
+@user_passes_test(e_admin)
 def editar_profissional(request,id):
     #busca o paciente pelo id ou retorna erro 404 se n existir
     profissional = get_object_or_404(Profissional, id=id)
@@ -245,6 +260,7 @@ def editar_profissional(request,id):
 
 #deletar profissional
 @login_required
+@user_passes_test(e_admin)
 def deletar_profissional(request,id):
     profissional = get_object_or_404(Profissional, id=id)
 
