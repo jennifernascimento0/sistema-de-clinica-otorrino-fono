@@ -115,18 +115,50 @@ def consulta_list(request):
         consultas = Consulta.objects.all().order_by('data')
     return render(request, 'logica/consulta_list.html', {'consultas': consultas})
 
+
+#FUNÇÃO QUE ENVIA O EVENTO (PUB/SUB)
+def enviar_evento_consulta(paciente_nome, data_hora):
+    TOKEN = "8723436040:AAFskYfvMo8sFwzQtcOEbBPnO5DP21zzig0"
+    CHAT_ID = "1027545415"
+    
+    mensagem = f"🔔 **Nova Consulta Agendada!**\n\n👤 Paciente: {paciente_nome}\n📅 Data/Hora: {data_hora}"
+    
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    payload = {
+        "chat_id": CHAT_ID,
+        "text": mensagem,
+        "parse_mode": "Markdown"
+    }
+    
+    try:
+        requests.post(url, json=payload, timeout=3)
+    except requests.exceptions.RequestException:
+        pass  #garante que o Django não trave se o Telegram falhar
+
+
 #criar consultas
 @login_required
 def criar_consulta(request):
     if request.method == 'POST':
         form = ConsultaForm(request.POST)
         if form.is_valid():
-            form.save()
+            consulta = form.save()
+            
+            try:
+                paciente_nome = str(consulta.paciente)
+                data_hora = consulta.data.strftime('%d/%m/%Y %H:%M')
+                
+                enviar_evento_consulta(paciente_nome, data_hora)
+                
+            except Exception:
+                pass #garante que se houver erro de digitação nos campos, a consulta ainda salva
+            
             return redirect('consulta_list')
     else:
         form = ConsultaForm()
 
     return render(request, 'logica/consulta_form.html', {'form': form})
+    
 
 @login_required
 def editar_consulta(request, id):
