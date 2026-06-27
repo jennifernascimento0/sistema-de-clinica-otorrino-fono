@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.contrib.auth.models import User
 import re
-
+import os
 
 def e_admin(user):
     return user.is_superuser
@@ -118,8 +118,8 @@ def consulta_list(request):
 
 #FUNÇÃO QUE ENVIA O EVENTO (PUB/SUB)
 def enviar_evento_consulta(paciente_nome, data_hora):
-    TOKEN = "8723436040:AAFskYfvMo8sFwzQtcOEbBPnO5DP21zzig0"
-    CHAT_ID = "1027545415"
+    TOKEN = os.getenv("TELEGRAM_TOKEN")
+    CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
     
     mensagem = f"🔔 **Nova Consulta Agendada!**\n\n👤 Paciente: {paciente_nome}\n📅 Data/Hora: {data_hora}"
     

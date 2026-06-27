@@ -79,4 +79,40 @@
             email:jessica@gmail.com;
             data:2026-05-13 10:03:28.480885
             
+             
+            paciente excluído
+            ID:1;
+            nome:Teste;
+            cpf: 123;
+            telefone: 999999999;
+            email:teste@teste.com;
+            data:2026-06-27 23:19:47.729033
+            
+             
+            paciente excluído
+            ID:4;
+            nome:Aline;
+            cpf: 987456321;
+            telefone: 81987885451;
+            email:aline@gmail.com;
+            data:2026-06-27 23:27:51.623179
+            
+             
+            paciente excluído
+            ID:3;
+            nome:Weslly Francelino;
+            cpf: 77777777;
+            telefone: 81 987888888;
+            email:weslly@gmail.com;
+            data:2026-06-27 23:28:00.881148
+            
+             
+            paciente excluído
+            ID:1;
+            nome:Teste;
+            cpf: 123;
+            telefone: 999;
+            email:teste@teste.com;
+            data:2026-06-27 23:33:37.524574
+            
             
