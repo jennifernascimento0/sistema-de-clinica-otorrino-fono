@@ -163,11 +163,11 @@ Foi implementado cache utilizando Redis com o objetivo de reduzir consultas repe
 Exemplo de utilização:
 
 ```python
-@cache_page(300)
+@cache_page(60)
 def paciente_list(request):
 ```
 
-As informações permanecem armazenadas em cache por 5 minutos, reduzindo o tempo de resposta para consultas frequentes.
+As informações permanecem armazenadas em cache por 1 minuto, reduzindo o tempo de resposta para consultas frequentes.
 
 ---
 
@@ -245,5 +245,6 @@ Projeto desenvolvido pelas alunas Jennifer de Oliveira e Marcela Helena, do 4º 
 
 # Diagrama do projeto
 
-<img width="1080" height="510" alt="image" src="https://github.com/user-attachments/assets/bb2831c0-ea37-4e66-b3fa-937278077aab" />
+<img width="1024" height="483" alt="dce7bd88-967a-467e-8d1b-b66d2c6f2532" src="https://github.com/user-attachments/assets/173fa55b-a0d8-4ea1-9170-6f9fa779e4e9" />
+
 
