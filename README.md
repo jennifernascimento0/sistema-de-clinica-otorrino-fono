@@ -208,7 +208,6 @@ Essa infraestrutura permite a execução da aplicação em ambiente de produçã
 
 ## Pacientes
 
-* CPF deve ser único;
 * Todos os campos obrigatórios devem ser preenchidos.
 
 ## Profissionais
@@ -243,6 +242,8 @@ clinica/
 # Desenvolvedores
 
 Projeto desenvolvido pelas alunas Jennifer de Oliveira e Marcela Helena, do 4º período de Análise e Desenvolvimento de Sistemas (ADS) do IFPE campus Paulista, para a disciplina de Desenvolvimento Web II lecionada pelo prof. Rodrigo Lira, utilizando Django e os principais conceitos de desenvolvimento de aplicações web modernas, incluindo arquitetura MVC, PostgreSQL, Redis, microsserviços, autenticação, CI/CD e implantação em nuvem.
+
+# Diagrama do projeto
 
 <img width="1080" height="510" alt="image" src="https://github.com/user-attachments/assets/bb2831c0-ea37-4e66-b3fa-937278077aab" />
 
