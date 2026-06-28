@@ -115,4 +115,13 @@
             email:teste@teste.com;
             data:2026-06-27 23:33:37.524574
             
+             
+            paciente excluído
+            ID:6;
+            nome:José Luis Silva;
+            cpf: 55555555555;
+            telefone: 81988888888;
+            email:jose@teste.com;
+            data:2026-06-28 02:02:53.065821
+            
             
