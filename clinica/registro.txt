@@ -124,4 +124,22 @@
             email:jose@teste.com;
             data:2026-06-28 02:02:53.065821
             
+             
+            paciente excluído
+            ID:1;
+            nome:Paulo Sergio do Nascimento;
+            cpf: 111.222.333-44;
+            telefone: 81987885458;
+            email:weslly@gmail.com;
+            data:2026-06-30 20:46:53.931718
+            
+             
+            paciente excluído
+            ID:8;
+            nome:teste;
+            cpf: 123456;
+            telefone: 789456665;
+            email:teste@gmail.com;
+            data:2026-06-30 21:07:31.347632
+            
             
